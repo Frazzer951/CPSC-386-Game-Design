@@ -1,6 +1,17 @@
-import pygame, sys
+import pygame
+import sys
 
-# from pygame.locals import *
+# Set up the colors.
+BLACK = (0, 0, 0)
+BLUE = (0, 0, 255)
+GRAY = (128, 128, 128)
+GREEN = (0, 128, 0)
+LIME = (0, 255, 0)
+PURPLE = (128, 0, 128)
+RED = (255, 0, 0)
+TEAL = (0, 128, 128)
+WHITE = (255, 255, 255)
+YELLOW = (255, 255, 0)
 
 
 def play():
@@ -10,13 +21,6 @@ def play():
     # Set up the window.
     windowSurface = pygame.display.set_mode((500, 400), 0, 32)
     pygame.display.set_caption("Hello world!")
-
-    # Set up the colors.
-    BLACK = (0, 0, 0)
-    WHITE = (255, 255, 255)
-    RED = (255, 0, 0)
-    GREEN = (0, 255, 0)
-    BLUE = (0, 0, 255)
 
     # Set up the fonts.
     basicFont = pygame.font.SysFont(None, 48)
