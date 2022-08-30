@@ -110,7 +110,7 @@ class Rectangle:
     # fill color      # still TODO -- needs graphics mode
 
     def __repr__(self):
-        return f"Rectangle(length={self.length},width={self.width},area={self.area():.2f},center={self.center})"
+        return f"Rectangle(length={self.length},width={self.width},area={self.area():.2f},perim={self.perimeter():.2f},center={self.center})"
 
     def area(self):
         return self.length * self.width
@@ -195,12 +195,12 @@ if __name__ == "__main__":
 # ==================================================
 # RUNNING TESTS on class RECTANGLE
 # ==================================================
-# Rectangle(length=5,width=5,area=25.00,center=(0,0))
-# r has been moved to Rectangle(length=5,width=5,area=25.00,center=(10,20))
-# r has been moved by (1, 1) to Rectangle(length=5,width=5,area=25.00,center=(11,21))
-# Rectangle(length=5,width=5,area=25.00,center=(3,5))
-# r2 has been moved to Rectangle(length=5,width=5,area=25.00,center=(10,20))
-# r2 has been moved by (1, 1) to Rectangle(length=5,width=5,area=25.00,center=(11,21))
+# Rectangle(length=5,width=5,area=25.00,perim=20.00,center=(0,0))
+# r has been moved to Rectangle(length=5,width=5,area=25.00,perim=20.00,center=(10,20))
+# r has been moved by (1, 1) to Rectangle(length=5,width=5,area=25.00,perim=20.00,center=(11,21))
+# Rectangle(length=5,width=5,area=25.00,perim=20.00,center=(3,5))
+# r2 has been moved to Rectangle(length=5,width=5,area=25.00,perim=20.00,center=(10,20))
+# r2 has been moved by (1, 1) to Rectangle(length=5,width=5,area=25.00,perim=20.00,center=(11,21))
 # ==================================================
 # ENDING TESTS on class RECTANGLE
 # ==================================================
