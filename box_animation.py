@@ -2,6 +2,48 @@ import pygame
 import sys
 import time
 
+
+class Vector:
+    def __init__(self, vx, vy):
+        self.vx = vx
+        self.vy = vy
+
+    def __repr__(self):
+        return f"Vector({self.vx}, {self.vy})"
+
+    def __add__(self, other):
+        return Vector(vx=self.vx + other.vx, vy=self.vy + other.vy)
+
+    def __sub__(self, other):
+        return Vector(vx=self.vx - other.vx, vy=self.vy - other.vy)
+
+    def __neg__(self):
+        return Vector(vx=-self.vx, vy=-self.vy)
+
+    def __eq__(self, other):
+        return self.vx == other.vx and self.vy == other.vy
+
+    @staticmethod
+    def run_tests():
+        v1 = Vector(vx=10, vy=0)
+        v2 = Vector(vx=0, vy=5)
+
+        vsum = v1 + v2
+        vsub = v1 - v2
+        neg_v1 = -v1
+        neg_v2 = -v2
+
+        print(f"{v1} + {v2} = {vsum}")
+        print(f"{v1} - {v2} = {vsub}")
+        print(f"-{v1} = {neg_v1}")
+        print(f"-{v2} = {neg_v2}")
+
+        assert vsum == Vector(vx=10, vy=5)
+        assert vsub == Vector(vx=10, vy=-5)
+        assert neg_v1 == Vector(vx=-10, vy=0)
+        assert neg_v2 == Vector(vx=0, vy=-5)
+
+
 # Set up direction variables.
 DOWNLEFT = "downleft"
 DOWNRIGHT = "downright"
@@ -24,7 +66,7 @@ def play():
     # Set up the window.
     WINDOWWIDTH = 400
     WINDOWHEIGHT = 400
-    windowSurface = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT), 32)
+    windowSurface = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT), 0, 32)
     pygame.display.set_caption("Animation")
 
     # Set up the box data structure.
@@ -94,7 +136,8 @@ def play():
 
 
 def main():
-    play()
+    # play()
+    Vector.run_tests()
 
 
 if __name__ == "__main__":
