@@ -1,4 +1,4 @@
-# You need three files for this assignment:  testing.py, vector.py, (on Slack #general), 
+# You need three files for this assignment:  testing.py, vector.py, (on Slack #general),
 # and box_player_food_collision_hw.py (this file)
 
 #========================================================================================
@@ -49,13 +49,13 @@ class Box:    # base object for creating rectangles at posn, with width, height,
         # print(f'Created Box #{Box.boxes_created}: {self}')
     @classmethod      # this function allows multiple constructors in Python
     def create_random(cls, screen, clr=None, width=None, height=None):
-        if width == None: 
+        if width == None:
             width = randint(10, 50)
         if height == None:
             height = randint(10, 50)
         left = randint(0, WINDOW_WIDTH - width)
         top = randint(0, WINDOW_HEIGHT - height)
-        vx = randint(-5, 5) 
+        vx = randint(-5, 5)
         vy = randint(-5, 5)
         if vy == 0:
             vy += 1
@@ -63,16 +63,16 @@ class Box:    # base object for creating rectangles at posn, with width, height,
             vx -= 1
         if clr == None:
             clr = COLORS[randint(0, 5)]
-        return Box(screen=screen, left=left, top=top, width=width, height=height, 
+        return Box(screen=screen, left=left, top=top, width=width, height=height,
                      vel=Vector(x=vx, y=vy), clr=clr)
     def __repr__(self):
         return f'Box(posn={self.posn},vel={self.vel},width={self.width},height={self.height},clr={self.clr})'
     def update(self):
         self.posn += self.vel
         x, y = self.posn.x, self.posn.y
-        if x <= 0 or x + self.width >= WINDOW_WIDTH: 
+        if x <= 0 or x + self.width >= WINDOW_WIDTH:
             self.vel.x *= -1
-        if y <= 0 or y + self.height >= WINDOW_HEIGHT: 
+        if y <= 0 or y + self.height >= WINDOW_HEIGHT:
             self.vel.y *= -1
         self.rect = pg.Rect(self.posn.x, self.posn.y, self.width, self.height)
         self.draw()
@@ -80,7 +80,7 @@ class Box:    # base object for creating rectangles at posn, with width, height,
         s = self.posn
         wh = (self.width, self.height)
         pg.draw.rect(self.screen, self.clr, pg.Rect(s.x, s.y, wh[0], wh[1]))
-    
+
 
 class Food:    # this class has-a Box object in it, and makes Food objects that the Player eats
     FOODSIZE = 20
@@ -88,15 +88,12 @@ class Food:    # this class has-a Box object in it, and makes Food objects that 
         self.box = Box.create_random(screen=screen, width=Food.FOODSIZE, height=Food.FOODSIZE, clr=clr)
     def __repr__(self):
         return f'Food/{self.box.__repr__()}'
-    def collide(self, player):  
-        pass  # TODO: remove this line
-        #TODO: fill in code to say if a collision occurred between the player and the Food object
-    def update(self):  
-        pass  # TODO: remove this line
-        # TODO: fill in code for updating the Food object
+    def collide(self, player):
+        return self.box.rect.colliderect(player.rect)
+    def update(self):
+        self.box.update()
     def draw(self):
-        pass  # TODO: remove this line
-        # TODO: fill in code for drawing the Food object
+        self.box.draw()
 
 
 class Foods:      # this class has a list of Food objects in it, which the Player eats
@@ -107,7 +104,9 @@ class Foods:      # this class has a list of Food objects in it, which the Playe
         self.create_foods()
     def create_foods(self):
         self.foods.clear()
-        # TODO: fill in code for creating the Food objects and adding them to self.foods
+        for _ in range(self.nfoods):
+            self.foods.append(Food(self.screen))
+
     def add_food(self, screen, left, top):
         print(f'in add_food, left={left} and top={top}')
         food = Food(screen=screen)
@@ -115,10 +114,9 @@ class Foods:      # this class has a list of Food objects in it, which the Playe
                       vel=food.box.vel, clr=food.box.clr)
         self.foods.append(food)
     def check_collision(self, player):
-        pass  # TODO: remove this line
-        # TODO: fill in code for going through all the foods in self.foods
-        # calling food.check_collision(player)
-        # and if there is a collision, remove the food from self.foods (see Textbook ch. 19)
+        for food in self.foods[:]:
+            if food.collide(player):
+                self.foods.remove(food)
     def update(self):
         for food in self.foods:
             food.update()   # update the posn of the food object using its vel
@@ -127,15 +125,15 @@ class Foods:      # this class has a list of Food objects in it, which the Playe
 
 class Player(Box):   # this class inherits from Box, and allows the Player to move and eat Food
     PLAYERSIZE = 40
-    def __init__(self, screen, clr=RED): 
+    def __init__(self, screen, clr=RED):
         size = Player.PLAYERSIZE
         rect = screen.get_rect().centery
         left = screen.get_rect().centerx - size / 2
         top = screen.get_rect().bottom - size
-        super().__init__(screen=screen, left=left, top=top, width=size, height=size, 
+        super().__init__(screen=screen, left=left, top=top, width=size, height=size,
                          vel=Vector(), clr=clr)
     def __repr__(self): return f'Player/{super().__repr__()}'
-    def update(self, foods): 
+    def update(self, foods):
         foods.check_collision(player=self)
         super().update()
 
@@ -144,8 +142,8 @@ class Game:   # this class controls the initialization and play of the game
     def __init__(self):
         pg.init()
         self.screen = pg.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), 0, 32)
-        pg.display.set_caption('Animation')   
-        self.foods = Foods(screen=self.screen, nfoods=40)   
+        pg.display.set_caption('Animation')
+        self.foods = Foods(screen=self.screen, nfoods=40)
         self.player = Player(screen=self.screen)
         # self.foods = [Food(screen=self.screen) for _ in range(103)]
         # self.boxes = [Box.create_random(screen=self.screen) for _ in range(103)]
@@ -163,20 +161,20 @@ class Game:   # this class controls the initialization and play of the game
                     finished = True
                 elif event.type == pg.KEYDOWN:
                     if event.key == pg.K_x:   # teleport the Player to a random location if 'x' is pressed
-                        self.player.posn = Vector(randint(0, WINDOW_WIDTH - self.player.width), 
+                        self.player.posn = Vector(randint(0, WINDOW_WIDTH - self.player.width),
                                                   randint(0, WINDOW_HEIGHT - self.player.height))
                     elif event.key in keys:   # changes Player vector if arrow keys pressed
                         self.player.vel += MOVESPEED * movement[event.key]
                 elif event.type == pg.KEYUP and event.key == pg.K_ESCAPE:  # stop moving Player
                     self.player.vel = Vector()
                 elif event.type == pg.MOUSEBUTTONUP:   # makes a new Food object if mouse is clicked
-                    pass  # TODO: remove this line
-                    # TODO: fill in code for adding the Food object at event.pos
- 
+                    self.foods.add_food(self.screen, event.pos[0], event.pos[1])
+
+
             self.screen.fill(DARK_GREY)     # fill the screen with dark grey
             self.player.update(self.foods)  # update and draw the Player
             self.foods.update()   # update and draw all the Food objects
- 
+
             pg.display.update()   # off-screen bitmap is bit-blitted (bit block transfer) to on-screen
             time.sleep(0.02)
         pg.quit()
@@ -185,7 +183,7 @@ class Game:   # this class controls the initialization and play of the game
 def main():
     # Vector.run_tests()
     g = Game()
-    g.play()            
+    g.play()
 
 if __name__ == '__main__':
     main()
