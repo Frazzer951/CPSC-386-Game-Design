@@ -9,8 +9,7 @@ class Lasers:
         self.settings = settings
 
     def shoot(self, settings, screen, ship, sound):
-        pass  # TODO: remove this line
-        # TODO: fill in the code to add a laser to self.lasers
+        self.lasers.add(Laser(settings, screen, ship, sound))
 
     def update(self):
         self.lasers.update()
@@ -39,9 +38,10 @@ class Laser(Sprite):
         sound.shoot_laser()
 
     def update(self):
-        pass  # TODO: remove this line
-        # TODO: update the lasers and draw them
+        self.y -= self.speed_factor
+        self.rect.y = self.y
+
+        self.draw()
 
     def draw(self):
-        pass  # TODO: remove this line
-        # TODO: draw the lasers  (use simple rectangles for now -- later we will use animated images)
+        pg.draw.rect(self.screen, self.color, self.rect)

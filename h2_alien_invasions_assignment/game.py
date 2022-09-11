@@ -17,19 +17,23 @@ class Game:
         pg.display.set_caption("Alien Invasion")
 
         self.sound = Sound(bg_music="sounds/startrek.wav")
-        # TODO: make a Sound object using the music sounds/startrek.wav (or any other appropriate music)
-        laser_group = Group()  # TODO: look up what a Group() is on pygame.org
-        # TODO: create the lasers and the ship
-        # TODO: initialize the speed settings
+
+        laser_group = Group()
+        self.lasers = Lasers(laser_group, self.settings)
+        self.ship = Ship(self.settings, self.screen, self.sound, self.lasers)
+
+        self.settings.initialize_speed_settings()
 
     def play(self):
-        # TODO: play the background music
-        while (
-            True
-        ):  # at the moment, only exits in gf.check_events if Ctrl/Cmd-Q pressed
-            # TODO: check for events
+        self.sound.play_bg()
+        while True:
+            gf.check_events(self.settings, self.ship)
+
             self.screen.fill(self.settings.bg_color)
-            # TODO: make the ship and lasers update and draw, each with a single function call
+
+            self.lasers.update()
+            self.ship.update()
+
             pg.display.flip()
 
 

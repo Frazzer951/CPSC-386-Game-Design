@@ -14,7 +14,6 @@ def check_keydown_events(event, settings, ship):
     key = event.key
     if key == pg.K_SPACE:
         ship.shooting = True
-    # TODO: add the elif that sets the ship's velocity
     elif key in movement.keys():
         ship.vel = settings.ship_speed_factor * movement[key]
 

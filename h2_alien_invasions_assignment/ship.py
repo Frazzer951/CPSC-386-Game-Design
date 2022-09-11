@@ -1,3 +1,4 @@
+from turtle import Screen
 import pygame
 from pygame.sprite import Sprite
 from game_functions import clamp
@@ -7,8 +8,12 @@ from vector import Vector
 class Ship(Sprite):
     def __init__(self, settings, screen, sound, lasers=None):
         super().__init__()
-        # TODO: save screen, settings, and sound in self
-        # TODO: load the image of images/ship.bmp
+        self.settings = settings
+        self.screen = screen
+        self.sound = sound
+
+        self.image = pygame.image.load("images/ship.bmp")
+
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
 
@@ -45,5 +50,4 @@ class Ship(Sprite):
         self.draw()
 
     def draw(self):
-        pass  # TODO: remove this line
-        # TODO: implement draw for ship
+        self.screen.blit(self.image, self.rect)
