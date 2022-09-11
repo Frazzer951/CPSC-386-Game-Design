@@ -12,7 +12,9 @@ class Ship(Sprite):
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
 
-        self.posn = self.center_ship()    # posn is the centerx, bottom of the rect, not left, top
+        self.posn = (
+            self.center_ship()
+        )  # posn is the centerx, bottom of the rect, not left, top
         self.center_ship()
 
         self.vel = Vector()
@@ -29,15 +31,19 @@ class Ship(Sprite):
         self.posn += self.vel
         clamp(self.rect, self.settings)
         if self.shooting:
-            print('shooting lasers')
+            print("shooting lasers")
             self.lasers_attempted += 1
             if self.lasers_attempted % self.settings.lasers_every == 0:
-                self.lasers.shoot(settings=self.settings, screen=self.screen, 
-                                  ship=self, sound=self.sound)
+                self.lasers.shoot(
+                    settings=self.settings,
+                    screen=self.screen,
+                    ship=self,
+                    sound=self.sound,
+                )
         self.rect.centerx = self.posn.x + self.rect.width / 2
         self.rect.centery = self.posn.y + self.rect.height / 2
         self.draw()
 
-    def draw(self): 
-        pass # TODO: remove this line
+    def draw(self):
+        pass  # TODO: remove this line
         # TODO: implement draw for ship

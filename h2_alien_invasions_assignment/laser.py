@@ -9,7 +9,7 @@ class Lasers:
         self.settings = settings
 
     def shoot(self, settings, screen, ship, sound):
-        pass   # TODO: remove this line
+        pass  # TODO: remove this line
         # TODO: fill in the code to add a laser to self.lasers
 
     def update(self):
@@ -25,6 +25,7 @@ class Lasers:
 
 class Laser(Sprite):
     """A class to manage lasers fired from the ship"""
+
     def __init__(self, settings, screen, ship, sound):
         super().__init__()
         self.screen = screen
@@ -38,9 +39,9 @@ class Laser(Sprite):
         sound.shoot_laser()
 
     def update(self):
-        pass   # TODO: remove this line
+        pass  # TODO: remove this line
         # TODO: update the lasers and draw them
 
     def draw(self):
-        pass   # TODO: remove this line
+        pass  # TODO: remove this line
         # TODO: draw the lasers  (use simple rectangles for now -- later we will use animated images)
