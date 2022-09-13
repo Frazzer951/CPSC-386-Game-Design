@@ -9,19 +9,26 @@ mainClock = pygame.time.Clock()
 WINDOWWIDTH = 400
 WINDOWHEIGHT = 400
 windowSurface = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT), 0, 32)
-pygame.display.set_caption('Sprites and Sounds')
+pygame.display.set_caption("Sprites and Sounds")
 
 # Set up the colors.
 WHITE = (255, 255, 255)
 
 # Set up the block data structure.
 player = pygame.Rect(300, 100, 40, 40)
-playerImage = pygame.image.load('player.png')
+playerImage = pygame.image.load("player.png")
 playerStretchedImage = pygame.transform.scale(playerImage, (40, 40))
-foodImage = pygame.image.load('cherry.png')
+foodImage = pygame.image.load("cherry.png")
 foods = []
 for i in range(20):
-    foods.append(pygame.Rect(random.randint(0, WINDOWWIDTH - 20), random.randint(0, WINDOWHEIGHT - 20), 20, 20))
+    foods.append(
+        pygame.Rect(
+            random.randint(0, WINDOWWIDTH - 20),
+            random.randint(0, WINDOWHEIGHT - 20),
+            20,
+            20,
+        )
+    )
 
 foodCounter = 0
 NEWFOOD = 40
@@ -35,8 +42,8 @@ moveDown = False
 MOVESPEED = 6
 
 # Set up the music.
-pickUpSound = pygame.mixer.Sound('pickup.wav')
-pygame.mixer.music.load('background.mid')
+pickUpSound = pygame.mixer.Sound("pickup.wav")
+pygame.mixer.music.load("background.mid")
 pygame.mixer.music.play(-1, 0.0)
 musicPlaying = True
 
@@ -90,7 +97,14 @@ while True:
     if foodCounter >= NEWFOOD:
         # Add new food.
         foodCounter = 0
-        foods.append(pygame.Rect(random.randint(0, WINDOWWIDTH - 20), random.randint(0, WINDOWHEIGHT - 20), 20, 20))
+        foods.append(
+            pygame.Rect(
+                random.randint(0, WINDOWWIDTH - 20),
+                random.randint(0, WINDOWHEIGHT - 20),
+                20,
+                20,
+            )
+        )
 
     # Draw the white background onto the surface.
     windowSurface.fill(WHITE)
@@ -105,7 +119,6 @@ while True:
     if moveRight and player.right < WINDOWWIDTH:
         player.right += MOVESPEED
 
-
     # Draw the block onto the surface.
     windowSurface.blit(playerStretchedImage, player)
 
@@ -113,8 +126,12 @@ while True:
     for food in foods[:]:
         if player.colliderect(food):
             foods.remove(food)
-            player = pygame.Rect(player.left, player.top, player.width + 2, player.height + 2)
-            playerStretchedImage = pygame.transform.scale(playerImage, (player.width, player.height))
+            player = pygame.Rect(
+                player.left, player.top, player.width + 2, player.height + 2
+            )
+            playerStretchedImage = pygame.transform.scale(
+                playerImage, (player.width, player.height)
+            )
             if musicPlaying:
                 pickUpSound.play()
 
@@ -124,4 +141,4 @@ while True:
 
     # Draw the window onto the screen.
     pygame.display.update()
-    mainClock.tick(40 )
+    mainClock.tick(40)

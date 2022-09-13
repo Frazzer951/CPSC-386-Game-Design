@@ -9,7 +9,7 @@ mainClock = pygame.time.Clock()
 WINDOWWIDTH = 400
 WINDOWHEIGHT = 400
 windowSurface = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT), 0, 32)
-pygame.display.set_caption('Input')
+pygame.display.set_caption("Input")
 
 # Set up the colors.
 BLACK = (0, 0, 0)
@@ -23,7 +23,14 @@ FOODSIZE = 20
 player = pygame.Rect(300, 100, 50, 50)
 foods = []
 for i in range(20):
-    foods.append(pygame.Rect(random.randint(0, WINDOWWIDTH - FOODSIZE), random.randint(0, WINDOWHEIGHT - FOODSIZE), FOODSIZE, FOODSIZE))
+    foods.append(
+        pygame.Rect(
+            random.randint(0, WINDOWWIDTH - FOODSIZE),
+            random.randint(0, WINDOWHEIGHT - FOODSIZE),
+            FOODSIZE,
+            FOODSIZE,
+        )
+    )
 
 # Set up movement variables.
 moveLeft = False
@@ -78,7 +85,14 @@ while True:
     if foodCounter >= NEWFOOD:
         # Add new food.
         foodCounter = 0
-        foods.append(pygame.Rect(random.randint(0, WINDOWWIDTH - FOODSIZE), random.randint(0, WINDOWHEIGHT - FOODSIZE), FOODSIZE, FOODSIZE))
+        foods.append(
+            pygame.Rect(
+                random.randint(0, WINDOWWIDTH - FOODSIZE),
+                random.randint(0, WINDOWHEIGHT - FOODSIZE),
+                FOODSIZE,
+                FOODSIZE,
+            )
+        )
 
     # Draw the white background onto the surface.
     windowSurface.fill(WHITE)
@@ -107,4 +121,4 @@ while True:
 
     # Draw the window onto the screen.
     pygame.display.update()
-    mainClock.tick(40 )
+    mainClock.tick(40)
