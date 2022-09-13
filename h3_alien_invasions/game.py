@@ -3,6 +3,7 @@ from settings import Settings
 import game_functions as gf
 from pygame.sprite import Group
 
+from alien import Aliens
 from laser import Lasers
 from ship import Ship
 from sound import Sound
@@ -26,6 +27,14 @@ class Game:
             sound=self.sound,
             lasers=self.lasers,
         )
+        alien_group = Group()
+        self.aliens = Aliens(
+            alien_group=alien_group,
+            settings=self.settings,
+            screen=self.screen,
+            ship=self.ship,
+            lasers=self.lasers.lasers,
+        )
 
         self.settings.initialize_speed_settings()
 
@@ -38,6 +47,7 @@ class Game:
 
             self.lasers.update()
             self.ship.update()
+            self.aliens.update()
 
             pg.display.flip()
 

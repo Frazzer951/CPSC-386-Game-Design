@@ -14,6 +14,8 @@ def check_keydown_events(event, settings, ship):
     key = event.key
     if key == pg.K_SPACE:
         ship.shooting = True
+    elif event.key == pg.K_q:
+        sys.exit()
     elif key in movement.keys():
         ship.vel = settings.ship_speed_factor * movement[key]
 
