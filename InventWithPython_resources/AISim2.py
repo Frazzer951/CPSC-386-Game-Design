@@ -284,7 +284,8 @@ for i in range(NUM_GAMES):  # while True:
         % (i + 1, scores["X"], scores["O"])
     )
     if scores[playerTile] > scores[computerTile]:
-        xWins += 1  # print('You beat the computer by %s points! Congratulations!' % (scores[playerTile] - scores[computerTile]))
+        # print('You beat the computer by %s points! Congratulations!' % (scores[playerTile] - scores[computerTile]))
+        xWins += 1
     elif scores[playerTile] < scores[computerTile]:
         oWins += 1  # print('You lost. The computer beat you by %s points.' % (scores[computerTile] - scores[playerTile]))
     else:
