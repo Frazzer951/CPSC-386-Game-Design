@@ -9,7 +9,7 @@ class Lasers:
         self.settings = settings
 
     def shoot(self, settings, screen, ship, sound):
-        self.lasers.add(Laser(settings, screen, ship, sound))
+        self.lasers.add(Laser(settings=settings, screen=screen, ship=ship, sound=sound))
 
     def update(self):
         self.lasers.update()
@@ -44,4 +44,4 @@ class Laser(Sprite):
         self.draw()
 
     def draw(self):
-        pg.draw.rect(self.screen, self.color, self.rect)
+        pg.draw.rect(surface=self.screen, color=self.color, rect=self.rect)

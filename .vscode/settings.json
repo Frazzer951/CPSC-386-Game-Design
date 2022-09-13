@@ -5,6 +5,7 @@
         "centery",
         "deltal",
         "deltay",
+        "KEYUP",
         "nfoods",
         "perim",
         "posn"

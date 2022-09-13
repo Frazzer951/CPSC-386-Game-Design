@@ -36,8 +36,9 @@ def check_events(settings, ship):
             check_keyup_events(event=event, ship=ship)
 
 
-def clamp(rect, settings):
-    left, top = rect.left, rect.top
+def clamp(posn, rect, settings):
+    left, top = posn.x, posn.y
     width, height = rect.width, rect.height
     left = max(0, min(left, settings.screen_width - width))
     top = max(0, min(top, settings.screen_height - height))
+    return Vector(x=left, y=top), pg.Rect(left, top, width, height)

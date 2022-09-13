@@ -19,15 +19,20 @@ class Game:
         self.sound = Sound(bg_music="sounds/startrek.wav")
 
         laser_group = Group()
-        self.lasers = Lasers(laser_group, self.settings)
-        self.ship = Ship(self.settings, self.screen, self.sound, self.lasers)
+        self.lasers = Lasers(laser_group=laser_group, settings=self.settings)
+        self.ship = Ship(
+            settings=self.settings,
+            screen=self.screen,
+            sound=self.sound,
+            lasers=self.lasers,
+        )
 
         self.settings.initialize_speed_settings()
 
     def play(self):
         self.sound.play_bg()
         while True:
-            gf.check_events(self.settings, self.ship)
+            gf.check_events(settings=self.settings, ship=self.ship)
 
             self.screen.fill(self.settings.bg_color)
 
