@@ -1,4 +1,3 @@
-from turtle import Screen
 import pygame
 from pygame.sprite import Sprite
 from game_functions import clamp
@@ -17,9 +16,8 @@ class Ship(Sprite):
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
 
-        self.posn = (
-            self.center_ship()
-        )  # posn is the centerx, bottom of the rect, not left, top
+        # posn is the centerx, bottom of the rect, not left, top
+        self.posn = self.center_ship()
         self.center_ship()
 
         self.vel = Vector()
