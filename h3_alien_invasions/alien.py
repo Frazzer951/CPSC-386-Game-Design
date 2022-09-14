@@ -22,9 +22,7 @@ class Aliens:
         return number_aliens_x
 
     def get_number_rows(self, ship_height, alien_height):
-        available_space_y = (
-            self.settings.screen_height - (3 * alien_height) - ship_height
-        )
+        available_space_y = self.settings.screen_height - (3 * alien_height) - ship_height
         # TODO: use book's code to correct the calculation for number_rows
         number_rows = None
         return number_rows
@@ -43,9 +41,7 @@ class Aliens:
 
     def create_fleet(self):
         number_aliens_x = self.get_number_aliens_x(self.model_alien.rect.width)
-        number_rows = self.get_number_rows(
-            self.ship.rect.height, self.model_alien.rect.height
-        )
+        number_rows = self.get_number_rows(self.ship.rect.height, self.model_alien.rect.height)
         for row_number in range(number_rows):
             for alien_number in range(number_aliens_x):
                 pass  # TODO: remove this line
@@ -75,9 +71,7 @@ class Aliens:
         self.settings.fleet_direction *= -1
 
     def check_collisions(self):
-        collisions = pg.sprite.groupcollide(
-            self.lasers, self.aliens, True, True
-        )  # first True means eliminate laser, ...
+        collisions = pg.sprite.groupcollide(self.lasers, self.aliens, True, True)  # first True means eliminate laser, ...
 
     def update(self):
         self.check_fleet_edges()

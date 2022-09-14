@@ -16,9 +16,7 @@ class Ship(Sprite):
         self.image = pg.image.load("images/ship.bmp")
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
-        self.posn = (
-            self.center_ship()
-        )  # posn is the centerx, bottom of the rect, not left, top
+        self.posn = self.center_ship()  # posn is the centerx, bottom of the rect, not left, top
         self.vel = Vector()
         self.lasers = lasers
         self.shooting = False
