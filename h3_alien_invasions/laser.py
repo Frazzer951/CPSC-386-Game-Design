@@ -1,12 +1,15 @@
 import pygame as pg
-from pygame.sprite import Sprite
+from pygame.sprite import Sprite, Group
 from random import randint
 
 
 class Lasers:
-    def __init__(self, laser_group, settings):
-        self.lasers = laser_group
+    def __init__(self, settings):
+        self.lasers = Group()
         self.settings = settings
+
+    def reset(self):
+        self.lasers.empty()
 
     def shoot(self, settings, screen, ship, sound):
         self.lasers.add(Laser(settings=settings, screen=screen, ship=ship, sound=sound))
@@ -32,7 +35,6 @@ class Laser(Sprite):
         self.rect.centerx = ship.rect.centerx
         self.rect.bottom = ship.rect.top
         self.y = float(self.rect.y)
-        # self.color = settings.laser_color
         self.color = (randint(0, 200), randint(0, 200), randint(0, 200))
         self.speed_factor = settings.laser_speed_factor
         sound.shoot_laser()
@@ -40,8 +42,7 @@ class Laser(Sprite):
     def update(self):
         self.y -= self.speed_factor
         self.rect.y = self.y
-
         self.draw()
 
     def draw(self):
-        pg.draw.rect(surface=self.screen, color=self.color, rect=self.rect)
+        pg.draw.rect(self.screen, self.color, self.rect)

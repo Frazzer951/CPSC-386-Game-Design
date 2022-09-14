@@ -1,7 +1,3 @@
-import imp
-from vector import Vector
-
-
 class Settings:
     """A class to store all settings for Alien Invasion."""
 
@@ -12,20 +8,21 @@ class Settings:
         self.screen_height = 800
         self.bg_color = (150, 150, 150)
 
-        # Laser settings
-        self.laser_width = 2
+        # TODO: test laser with a really wide laser
+        self.laser_width = 5
         self.laser_height = 30
         self.laser_color = 255, 0, 0
-        self.lasers_every = 10
+        self.lasers_every = 1
 
-        # Alien settings
-        self.alien_speed_factor = 1
+        # TODO: set a ship_limit of 3
+        self.ship_limit = None  # total ships allowed in game before game over
+
         self.fleet_drop_speed = 10
-        self.fleet_direction = Vector(1, 0)
-
+        self.fleet_direction = 1  # change to a Vector(1, 0) move to the right, and ...
         self.initialize_speed_settings()
 
     def initialize_speed_settings(self):
+        self.alien_speed_factor = 3
         self.ship_speed_factor = 3
         self.laser_speed_factor = 3
 

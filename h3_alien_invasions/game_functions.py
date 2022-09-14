@@ -14,18 +14,17 @@ def check_keydown_events(event, settings, ship):
     key = event.key
     if key == pg.K_SPACE:
         ship.shooting = True
-    elif event.key == pg.K_q:
-        sys.exit()
     elif key in movement.keys():
-        ship.vel = settings.ship_speed_factor * movement[key]
+        ship.vel += settings.ship_speed_factor * movement[key]
 
 
 def check_keyup_events(event, ship):
     key = event.key
     if key == pg.K_SPACE:
         ship.shooting = False
-    elif key in movement.keys():
-        ship.vel = Vector()
+    elif key == pg.K_ESCAPE:
+        ship.vel = Vector()  # Note: Escape key stops the ship
+    # elif key in movement.keys(): ship.vel = Vector()
 
 
 def check_events(settings, ship):

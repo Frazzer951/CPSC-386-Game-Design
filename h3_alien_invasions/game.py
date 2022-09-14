@@ -1,10 +1,8 @@
 import pygame as pg
 from settings import Settings
 import game_functions as gf
-from pygame.sprite import Group
 
-from alien import Aliens
-from laser import Lasers
+# TODO: import Lasers and Aliens
 from ship import Ship
 from sound import Sound
 
@@ -18,37 +16,60 @@ class Game:
         pg.display.set_caption("Alien Invasion")
 
         self.sound = Sound(bg_music="sounds/startrek.wav")
+        # TODO: fix the missing reference to Lasers and Aliens using correct import statements
+        #       (at the top of the file)
 
-        laser_group = Group()
-        self.lasers = Lasers(laser_group=laser_group, settings=self.settings)
+        print("THIS CODE WILL NOT RUN UNTIL YOU FIX ALL OF THE TODO STATEMENTS")
+        print(
+            "   Well, actually, as you implemement the TODOs, more and more of the code will run"
+        )
+        print(
+            "   Be sure that ALL of the features in chapter 13 are working by the time you are done"
+        )
+        print("   Submit the zip file of the project folder, AND")
+        print(
+            "   a GIF file showing the features of the program: Aliens, lasers destroying them, "
+        )
+        print(
+            "   Aliens bouncing off the walls, killing the ship if they hit it or hit the bottom"
+        )
+        print("You do NOT have to implement a Game_Stat class")
+        self.lasers = Lasers(settings=self.settings)
         self.ship = Ship(
-            settings=self.settings,
+            game=self,
             screen=self.screen,
+            settings=self.settings,
             sound=self.sound,
             lasers=self.lasers,
         )
-        alien_group = Group()
         self.aliens = Aliens(
-            alien_group=alien_group,
-            settings=self.settings,
+            game=self,
             screen=self.screen,
+            settings=self.settings,
+            lasers=self.lasers,
             ship=self.ship,
-            lasers=self.lasers.lasers,
         )
-
         self.settings.initialize_speed_settings()
+
+    def reset(self):
+        print("Resetting game...")
+        # TODO reset the ship, aliens and lasers
+
+    def game_over(self):
+        # TODO fill in the rest of the game_over code
+        print("All ships gone: game over!")
 
     def play(self):
         self.sound.play_bg()
-        while True:
+        while (
+            True
+        ):  # at the moment, only exits in gf.check_events if Ctrl/Cmd-Q pressed
             gf.check_events(settings=self.settings, ship=self.ship)
-
             self.screen.fill(self.settings.bg_color)
+            self.ship.update()
+            # TODO update the aliens on the next line
 
             self.lasers.update()
-            self.ship.update()
-            self.aliens.update()
-
             pg.display.flip()
 
 

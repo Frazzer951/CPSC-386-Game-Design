@@ -1,12 +1,12 @@
 import pygame as pg
-from time import time
+import time
 
 
 class Sound:
     def __init__(self, bg_music):
         pg.mixer.init()
         pg.mixer.music.load(bg_music)
-        pg.mixer.music.set_volume(0.2)
+        pg.mixer.music.set_volume(0.1)
         laser_sound = pg.mixer.Sound("sounds/laser.wav")
         gameover_sound = pg.mixer.Sound("sounds/gameover.wav")
         self.sounds = {"laser": laser_sound, "gameover": gameover_sound}
