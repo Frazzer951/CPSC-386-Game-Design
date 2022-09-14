@@ -53,7 +53,7 @@ class Aliens:
 
     def check_fleet_bottom(self):
         for alien in self.aliens.sprites():
-            if alien.check_bottom_or_ship():
+            if alien.check_bottom_or_ship(ship=self.ship):
                 self.ship.die()
                 break
 

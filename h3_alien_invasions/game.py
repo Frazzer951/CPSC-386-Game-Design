@@ -1,3 +1,4 @@
+from time import sleep
 import pygame as pg
 from settings import Settings
 import game_functions as gf
@@ -60,6 +61,7 @@ class Game:
             self.aliens.update()
             self.lasers.update()
             pg.display.flip()
+            sleep(0.01)
 
 
 def main():
