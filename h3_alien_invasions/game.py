@@ -64,7 +64,7 @@ class Game:
             self.aliens.update()
             self.lasers.update()
             pg.display.flip()
-            sleep(0.01)
+            sleep(0.01)  # Slow game down so it is playable
 
 
 def main():
