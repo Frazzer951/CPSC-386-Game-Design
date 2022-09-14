@@ -1,4 +1,3 @@
-from asyncio import ReadTransport
 import pygame as pg
 from pygame.sprite import Sprite, Group
 from laser import Lasers
@@ -99,7 +98,7 @@ class Alien(Sprite):
 
     def check_bottom_or_ship(self, ship):
         screen_rect = self.screen.get_rect()
-        if (not screen_rect.colliderect(self.rect)) or self.rect.colliderect(ship.rect):
+        if self.rect.bottom >= screen_rect.bottom or self.rect.colliderect(ship.rect):
             return True
 
     def update(self):

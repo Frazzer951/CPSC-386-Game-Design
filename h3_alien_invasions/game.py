@@ -46,11 +46,14 @@ class Game:
 
     def reset(self):
         print("Resetting game...")
-        # TODO reset the ship, aliens and lasers
+        self.lasers.reset()
+        self.aliens.reset()
+        self.ship.reset()
 
     def game_over(self):
-        # TODO fill in the rest of the game_over code
         print("All ships gone: game over!")
+        self.sound.gameover()
+        exit()
 
     def play(self):
         self.sound.play_bg()

@@ -11,7 +11,6 @@ class Settings:
         self.screen_height = 800
         self.bg_color = (150, 150, 150)
 
-        # TODO: test laser with a really wide laser
         self.laser_width = 5
         self.laser_height = 30
         self.laser_color = 255, 0, 0

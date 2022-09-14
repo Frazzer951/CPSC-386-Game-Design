@@ -33,11 +33,8 @@ class Ship(Sprite):
         self.rect.left, self.rect.top = self.posn.x, self.posn.y
 
     def die(self):
-        print(f"Ship is dead! Only {self.ships_left} ships left")
-        # TODO: reduce the ships_left,
-        #       reset the game if ships > 0
-        #       game_over if the ships == 0
         self.ships_left -= 1
+        print(f"Ship is dead! Only {self.ships_left} ships left")
         self.game.reset() if self.ships_left > 0 else self.game.game_over()
 
     def update(self):
