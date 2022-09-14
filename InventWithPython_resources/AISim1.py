@@ -178,9 +178,7 @@ def getPlayerMove(board, playerTile):
             else:
                 break
         else:
-            print(
-                "That is not a valid move. Enter the column (1-8) and then the row (1-8)."
-            )
+            print("That is not a valid move. Enter the column (1-8) and then the row (1-8).")
             print("For example, 81 will move on the top-right corner.")
 
     return [x, y]
@@ -211,10 +209,7 @@ def getComputerMove(board, computerTile):
 
 def printScore(board, playerTile, computerTile):
     scores = getScoreOfBoard(board)
-    print(
-        "You: %s points. Computer: %s points."
-        % (scores[playerTile], scores[computerTile])
-    )
+    print("You: %s points. Computer: %s points." % (scores[playerTile], scores[computerTile]))
 
 
 def playGame(playerTile, computerTile):
@@ -279,15 +274,9 @@ while True:
     scores = getScoreOfBoard(finalBoard)
     print("X scored %s points. O scored %s points." % (scores["X"], scores["O"]))
     if scores[playerTile] > scores[computerTile]:
-        print(
-            "You beat the computer by %s points! Congratulations!"
-            % (scores[playerTile] - scores[computerTile])
-        )
+        print("You beat the computer by %s points! Congratulations!" % (scores[playerTile] - scores[computerTile]))
     elif scores[playerTile] < scores[computerTile]:
-        print(
-            "You lost. The computer beat you by %s points."
-            % (scores[computerTile] - scores[playerTile])
-        )
+        print("You lost. The computer beat you by %s points." % (scores[computerTile] - scores[playerTile]))
     else:
         print("The game was a tie!")
 

@@ -151,9 +151,7 @@ while True:
                     baddieSize,
                 ),
                 "speed": random.randint(BADDIEMINSPEED, BADDIEMAXSPEED),
-                "surface": pygame.transform.scale(
-                    baddieImage, (baddieSize, baddieSize)
-                ),
+                "surface": pygame.transform.scale(baddieImage, (baddieSize, baddieSize)),
             }
 
             baddies.append(newBaddie)

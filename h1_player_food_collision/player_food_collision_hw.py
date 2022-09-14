@@ -103,9 +103,7 @@ class Food:
     FOODSIZE = 20
 
     def __init__(self, screen, clr=GREEN):
-        self.box = Box.create_random(
-            screen=screen, width=Food.FOODSIZE, height=Food.FOODSIZE, clr=clr
-        )
+        self.box = Box.create_random(screen=screen, width=Food.FOODSIZE, height=Food.FOODSIZE, clr=clr)
 
     def __repr__(self):
         return f"Food/{self.box.__repr__()}"
@@ -159,9 +157,7 @@ class Foods:
             food.draw()  # draw the food object in its new location
 
 
-class Player(
-    Box
-):  # this class inherits from Box, and allows the Player to move and eat Food
+class Player(Box):  # this class inherits from Box, and allows the Player to move and eat Food
     PLAYERSIZE = 40
 
     def __init__(self, screen, clr=RED):

@@ -129,12 +129,8 @@ while True:
     for food in foods[:]:
         if player.colliderect(food):
             foods.remove(food)
-            player = pygame.Rect(
-                player.left, player.top, player.width + 2, player.height + 2
-            )
-            playerStretchedImage = pygame.transform.scale(
-                playerImage, (player.width, player.height)
-            )
+            player = pygame.Rect(player.left, player.top, player.width + 2, player.height + 2)
+            playerStretchedImage = pygame.transform.scale(playerImage, (player.width, player.height))
             if musicPlaying:
                 pickUpSound.play()
 

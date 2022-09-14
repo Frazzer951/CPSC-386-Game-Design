@@ -178,9 +178,7 @@ def getPlayerMove(board, playerTile):
             else:
                 break
         else:
-            print(
-                "That is not a valid move. Enter the column (1-8) and then the row (1-8)."
-            )
+            print("That is not a valid move. Enter the column (1-8) and then the row (1-8).")
             print("For example, 81 will move on the top-right corner.")
 
     return [x, y]
@@ -256,10 +254,7 @@ def getCornerSideBestMove(board, tile):
 
 def printScore(board, playerTile, computerTile):
     scores = getScoreOfBoard(board)
-    print(
-        "You: %s points. Computer: %s points."
-        % (scores[playerTile], scores[computerTile])
-    )
+    print("You: %s points. Computer: %s points." % (scores[playerTile], scores[computerTile]))
 
 
 def playGame(playerTile, computerTile):
@@ -324,10 +319,7 @@ for i in range(NUM_GAMES):  # while True:
     # Display the final score.
     # drawBoard(finalBoard)
     scores = getScoreOfBoard(finalBoard)
-    print(
-        "#%s: X scored %s points. O scored %s points."
-        % (i + 1, scores["X"], scores["O"])
-    )
+    print("#%s: X scored %s points. O scored %s points." % (i + 1, scores["X"], scores["O"]))
     if scores[playerTile] > scores[computerTile]:
         # print('You beat the computer by %s points! Congratulations!' % (scores[playerTile] - scores[computerTile]))
         xWins += 1
