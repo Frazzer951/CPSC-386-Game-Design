@@ -2,7 +2,8 @@ import pygame as pg
 from settings import Settings
 import game_functions as gf
 
-# TODO: import Lasers and Aliens
+from alien import Aliens
+from laser import Lasers
 from ship import Ship
 from sound import Sound
 
@@ -16,24 +17,15 @@ class Game:
         pg.display.set_caption("Alien Invasion")
 
         self.sound = Sound(bg_music="sounds/startrek.wav")
-        # TODO: fix the missing reference to Lasers and Aliens using correct import statements
-        #       (at the top of the file)
 
         print("THIS CODE WILL NOT RUN UNTIL YOU FIX ALL OF THE TODO STATEMENTS")
-        print(
-            "   Well, actually, as you implemement the TODOs, more and more of the code will run"
-        )
-        print(
-            "   Be sure that ALL of the features in chapter 13 are working by the time you are done"
-        )
-        print("   Submit the zip file of the project folder, AND")
-        print(
-            "   a GIF file showing the features of the program: Aliens, lasers destroying them, "
-        )
-        print(
-            "   Aliens bouncing off the walls, killing the ship if they hit it or hit the bottom"
-        )
-        print("You do NOT have to implement a Game_Stat class")
+        print("    Well, actually, as you implement the TODOs, more and more of the code will run")
+        print("    Be sure that ALL of the features in chapter 13 are working by the time you are done")
+        print("    Submit the zip file of the project folder, AND")
+        print("    a GIF file showing the features of the program: Aliens, lasers destroying them,")
+        print("    Aliens bouncing off the walls, killing the ship if they hit it or hit the bottom")
+        print("    You do NOT have to implement a Game_Stat class")
+
         self.lasers = Lasers(settings=self.settings)
         self.ship = Ship(
             game=self,
@@ -61,14 +53,11 @@ class Game:
 
     def play(self):
         self.sound.play_bg()
-        while (
-            True
-        ):  # at the moment, only exits in gf.check_events if Ctrl/Cmd-Q pressed
+        while True:  # at the moment, only exits in gf.check_events if Ctrl/Cmd-Q pressed
             gf.check_events(settings=self.settings, ship=self.ship)
             self.screen.fill(self.settings.bg_color)
             self.ship.update()
-            # TODO update the aliens on the next line
-
+            self.aliens.update()
             self.lasers.update()
             pg.display.flip()
 
