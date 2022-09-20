@@ -21,9 +21,18 @@ class Game:
         self.sound = Sound(bg_music="sounds/startrek.wav")
 
         self.scoreboard = Scoreboard(game=self)
-        self.lasers = Lasers(settings=self.settings)
+        self.lasers = Lasers(settings=self.settings, screen=self.screen)
+        self.alien_lasers = Lasers(settings=self.settings, screen=self.screen, shoot_down=True)
         self.ship = Ship(game=self, screen=self.screen, settings=self.settings, sound=self.sound, lasers=self.lasers)
-        self.aliens = Aliens(game=self, screen=self.screen, settings=self.settings, lasers=self.lasers, ship=self.ship)
+        self.aliens = Aliens(
+            game=self,
+            screen=self.screen,
+            settings=self.settings,
+            sound=self.sound,
+            lasers=self.lasers,
+            alien_lasers=self.alien_lasers,
+            ship=self.ship,
+        )
         self.settings.initialize_speed_settings()
 
     def reset(self):
@@ -47,6 +56,7 @@ class Game:
             self.ship.update()
             self.aliens.update()
             self.lasers.update()
+            self.alien_lasers.update()
             self.scoreboard.update()
             pg.display.flip()
 
