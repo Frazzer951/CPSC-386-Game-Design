@@ -14,8 +14,8 @@ class Lasers:
     def reset(self):
         self.lasers.empty()
 
-    def shoot(self, settings, screen, ship, sound):
-        self.lasers.add(Laser(settings=settings, screen=screen, ship=ship, sound=sound, shoot_down=self.shoot_down))
+    def shoot(self, ship):
+        self.lasers.add(Laser(game=self.game, ship=ship, shoot_down=self.shoot_down))
 
     def update(self):
         self.lasers.update()
@@ -31,13 +31,13 @@ class Lasers:
 class Laser(Sprite):
     """A class to manage lasers fired from the ship"""
 
-    def __init__(self, game, shoot_down=False):
+    def __init__(self, game, ship, shoot_down=False):
         super().__init__()
         self.game = game
         self.screen = game.screen
         self.rect = pg.Rect(0, 0, game.settings.laser_width, game.settings.laser_height)
-        self.rect.centerx = game.ship.rect.centerx
-        self.rect.bottom = game.ship.rect.top
+        self.rect.centerx = ship.rect.centerx
+        self.rect.bottom = ship.rect.top
         self.y = float(self.rect.y)
         self.color = (randint(0, 200), randint(0, 200), randint(0, 200))
         self.speed_factor = game.settings.laser_speed_factor

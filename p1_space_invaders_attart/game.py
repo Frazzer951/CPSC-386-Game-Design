@@ -2,11 +2,12 @@ import pygame as pg
 from settings import Settings
 import game_functions as gf
 
-from laser import Lasers
 from alien import Aliens
+from barrier import Barriers
+from laser import Lasers
+from scoreboard import Scoreboard
 from ship import Ship
 from sound import Sound
-from scoreboard import Scoreboard
 import sys
 
 
@@ -25,10 +26,13 @@ class Game:
         self.alien_lasers = Lasers(game=self, shoot_down=True)
         self.ship = Ship(game=self)
         self.aliens = Aliens(game=self)
+        self.barriers = Barriers(game=self)
+
         self.settings.initialize_speed_settings()
 
     def reset(self):
         print("Resetting game...")
+        self.barriers.reset()
         self.lasers.reset()
         self.ship.reset()
         self.aliens.reset()
@@ -47,6 +51,7 @@ class Game:
             self.screen.fill(self.settings.bg_color)
             self.ship.update()
             self.aliens.update()
+            self.barriers.update()
             self.lasers.update()
             self.alien_lasers.update()
             self.scoreboard.update()

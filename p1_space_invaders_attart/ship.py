@@ -6,7 +6,7 @@ from sys import exit
 
 
 class Ship(Sprite):
-    def __init__(self, game, lasers=None):
+    def __init__(self, game):
         super().__init__()
         self.game = game
         self.screen = game.screen
@@ -18,7 +18,7 @@ class Ship(Sprite):
         self.screen_rect = game.screen.get_rect()
         self.posn = self.center_ship()  # posn is the centerx, bottom of the rect, not left, top
         self.vel = Vector()
-        self.lasers = lasers
+        self.lasers = game.lasers
         self.shooting = False
         self.lasers_attempted = 0
 
@@ -43,7 +43,7 @@ class Ship(Sprite):
         if self.shooting:
             self.lasers_attempted += 1
             if self.lasers_attempted % self.settings.lasers_every == 0:
-                self.lasers.shoot(settings=self.settings, screen=self.screen, ship=self, sound=self.sound)
+                self.lasers.shoot(ship=self)
         self.draw()
 
     def draw(self):

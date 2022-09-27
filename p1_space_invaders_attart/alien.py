@@ -66,7 +66,7 @@ class Alien(Sprite):
 
         if pg.time.get_ticks() - self.shoot_delay >= self.last_shoot_time:
             self.last_shoot_time = pg.time.get_ticks()
-            self.alien_lasers.shoot(settings=self.settings, screen=self.screen, ship=self, sound=self.sound)
+            self.alien_lasers.shoot(ship=self)
 
         self.draw()
 
