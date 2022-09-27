@@ -4,10 +4,11 @@ from random import randint
 
 
 class Lasers:
-    def __init__(self, settings, screen, shoot_down=False):
+    def __init__(self, game, shoot_down=False):
         self.lasers = Group()
-        self.settings = settings
-        self.screen = screen
+        self.game = game
+        self.settings = game.settings
+        self.screen = game.screen
         self.shoot_down = shoot_down
 
     def reset(self):
@@ -30,18 +31,19 @@ class Lasers:
 class Laser(Sprite):
     """A class to manage lasers fired from the ship"""
 
-    def __init__(self, settings, screen, ship, sound, shoot_down=False):
+    def __init__(self, game, shoot_down=False):
         super().__init__()
-        self.screen = screen
-        self.rect = pg.Rect(0, 0, settings.laser_width, settings.laser_height)
-        self.rect.centerx = ship.rect.centerx
-        self.rect.bottom = ship.rect.top
+        self.game = game
+        self.screen = game.screen
+        self.rect = pg.Rect(0, 0, game.settings.laser_width, game.settings.laser_height)
+        self.rect.centerx = game.ship.rect.centerx
+        self.rect.bottom = game.ship.rect.top
         self.y = float(self.rect.y)
         self.color = (randint(0, 200), randint(0, 200), randint(0, 200))
-        self.speed_factor = settings.laser_speed_factor
+        self.speed_factor = game.settings.laser_speed_factor
         if shoot_down:
             self.speed_factor *= -1
-        sound.shoot_laser()
+        game.sound.shoot_laser()
 
     def update(self):
         self.y -= self.speed_factor
