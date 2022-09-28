@@ -1,5 +1,5 @@
 from pygame.sprite import Sprite, Group
-from random import randrange
+from random import randint
 from timer import Timer
 import pygame as pg
 
@@ -23,16 +23,11 @@ class Alien(Sprite):
         super().__init__()
         self.screen = game.screen
         self.settings = game.settings
-        self.sound = game.sound
         self.image = pg.image.load("images/alien0_0.png")
         self.rect = self.image.get_rect()
         self.rect.y = self.rect.height
         self.x = float(self.rect.x)
         self.type = type
-
-        self.alien_lasers = game.alien_lasers
-        self.shoot_delay = randrange(10_000, 100_000)
-        self.last_shoot_time = pg.time.get_ticks()
 
         self.dying = self.dead = False
 
@@ -62,11 +57,6 @@ class Alien(Sprite):
         settings = self.settings
         self.x += settings.alien_speed_factor * settings.fleet_direction
         self.rect.x = self.x
-
-        if pg.time.get_ticks() - self.shoot_delay >= self.last_shoot_time:
-            self.last_shoot_time = pg.time.get_ticks()
-            self.alien_lasers.shoot(ship=self)
-
         self.draw()
 
     def draw(self):
@@ -83,10 +73,16 @@ class Aliens:
         self.game = game
         self.sb = game.scoreboard
         self.aliens = Group()
+
+        # self.ship_lasers = game.ship.lasers.lasers    # a laser Group
+        # self.aliens_lasers = Lasers(settings=game.settings)
+
         self.ship_lasers = game.ship_lasers.lasers  # a laser Group
         self.alien_lasers = game.alien_lasers
+
         self.screen = game.screen
         self.settings = game.settings
+        self.shoot_requests = 0
         self.ship = game.ship
         self.create_fleet()
 
@@ -98,11 +94,9 @@ class Aliens:
     def reset(self):
         self.aliens.empty()
         self.create_fleet()
-        self.aliens_lasers.reset()
+        self.alien_lasers.reset()
 
     def create_alien(self, alien_number, row_number):
-        if row_number > 5:
-            raise ValueError("row number must be less than 6")
         type = row_number // 2
         alien = Alien(game=self.game, type=type)
         alien_width = alien.rect.width
@@ -141,6 +135,19 @@ class Aliens:
             alien.rect.y += self.settings.fleet_drop_speed
         self.settings.fleet_direction *= -1
 
+    def shoot_from_random_alien(self):
+        self.shoot_requests += 1
+        if self.shoot_requests % self.settings.aliens_shoot_every != 0:
+            return
+
+        num_aliens = len(self.aliens.sprites())
+        alien_num = randint(0, num_aliens)
+        i = 0
+        for alien in self.aliens.sprites():
+            if i == alien_num:
+                self.alien_lasers.shoot(game=self.game, x=alien.rect.centerx, y=alien.rect.bottom)
+            i += 1
+
     # alien_lasers hitting the ship Or
     # alien_lasers hitting a barrier or
     # alien_lasers hitting a ship_lasers
@@ -161,6 +168,7 @@ class Aliens:
         self.check_fleet_bottom()
         self.check_collisions()
         self.check_fleet_empty()
+        self.shoot_from_random_alien()
         for alien in self.aliens.sprites():
             if alien.dead:  # set True once the explosion animation has completed
                 alien.remove()

@@ -12,8 +12,9 @@ class Settings:
         self.laser_width = 5
         self.laser_height = 30
         self.laser_color = 255, 0, 0
-        self.lasers_every = 10
+        self.lasers_every = 10  # change to 1 to see faster lasers
 
+        self.aliens_shoot_every = 120  # about every 2 seconds at 60 fps
         self.alien_points = 50
 
         # # TODO: set a ship_limit of 3
@@ -26,7 +27,7 @@ class Settings:
     def initialize_speed_settings(self):
         self.alien_speed_factor = 1
         self.ship_speed_factor = 3
-        self.laser_speed_factor = 3
+        self.laser_speed_factor = 1
 
     def increase_speed(self):
         scale = self.speedup_scale

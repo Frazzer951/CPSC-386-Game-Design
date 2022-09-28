@@ -2,7 +2,7 @@ import pygame as pg
 from settings import Settings
 import game_functions as gf
 
-from laser import Lasers
+from laser import Lasers, LaserType
 from alien import Aliens
 from ship import Ship
 from sound import Sound
@@ -22,8 +22,8 @@ class Game:
         self.sound = Sound(bg_music="sounds/startrek.wav")
         self.scoreboard = Scoreboard(game=self)
 
-        self.ship_lasers = Lasers(game=self)
-        self.alien_lasers = Lasers(game=self, shoot_down=True)
+        self.ship_lasers = Lasers(settings=self.settings, type=LaserType.SHIP)
+        self.alien_lasers = Lasers(settings=self.settings, type=LaserType.ALIEN)
 
         self.barriers = Barriers(game=self)
         self.ship = Ship(game=self)
