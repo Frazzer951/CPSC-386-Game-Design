@@ -20,20 +20,22 @@ class Game:
         pg.display.set_caption("Alien Invasion")
 
         self.sound = Sound(bg_music="sounds/startrek.wav")
-
         self.scoreboard = Scoreboard(game=self)
-        self.lasers = Lasers(game=self)
+
+        self.ship_lasers = Lasers(game=self)
         self.alien_lasers = Lasers(game=self, shoot_down=True)
+
+        self.barriers = Barriers(game=self)
         self.ship = Ship(game=self)
         self.aliens = Aliens(game=self)
-        self.barriers = Barriers(game=self)
 
         self.settings.initialize_speed_settings()
 
     def reset(self):
         print("Resetting game...")
         self.barriers.reset()
-        self.lasers.reset()
+        self.ship_lasers.reset()
+        self.alien_lasers.reset()
         self.ship.reset()
         self.aliens.reset()
         # self.scoreboard.reset()
@@ -52,7 +54,7 @@ class Game:
             self.ship.update()
             self.aliens.update()
             self.barriers.update()
-            self.lasers.update()
+            self.ship_lasers.update()
             self.alien_lasers.update()
             self.scoreboard.update()
             pg.display.flip()
