@@ -1,6 +1,7 @@
 import pygame as pg
 from settings import Settings
 import game_functions as gf
+from time import time
 
 from laser import Lasers, LaserType
 from alien import Aliens
@@ -46,7 +47,9 @@ class Game:
 
     def play(self):
         self.sound.play_bg()
+        frametime = 1 / 60
         while True:  # at the moment, only exits in gf.check_events if Ctrl/Cmd-Q pressed
+            start_time = time()
             gf.check_events(settings=self.settings, ship=self.ship)
             self.screen.fill(self.settings.bg_color)
             self.ship.update()
@@ -54,6 +57,9 @@ class Game:
             self.barriers.update()
             self.scoreboard.update()
             pg.display.flip()
+            elapsed = time() - start_time
+            while elapsed < frametime:  # run with a max fps of 60
+                elapsed = time() - start_time
 
 
 def main():
