@@ -12,7 +12,7 @@ class Settings:
         self.laser_width = 5
         self.laser_height = 30
         self.laser_color = 255, 0, 0
-        self.lasers_every = 1
+        self.lasers_every = 10
 
         self.alien_points = 50
 

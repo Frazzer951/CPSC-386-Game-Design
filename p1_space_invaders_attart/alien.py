@@ -1,7 +1,7 @@
-from random import randrange
-import pygame as pg
 from pygame.sprite import Sprite, Group
+from random import randrange
 from timer import Timer
+import pygame as pg
 
 
 class Alien(Sprite):
@@ -21,11 +21,10 @@ class Alien(Sprite):
 
     def __init__(self, game, type):
         super().__init__()
-        self.game = game
         self.screen = game.screen
         self.settings = game.settings
         self.sound = game.sound
-        self.image = pg.image.load("images/alien0.bmp")
+        self.image = pg.image.load("images/alien0_0.png")
         self.rect = self.image.get_rect()
         self.rect.y = self.rect.height
         self.x = float(self.rect.x)
@@ -84,32 +83,37 @@ class Aliens:
         self.game = game
         self.sb = game.scoreboard
         self.aliens = Group()
-        self.lasers = game.lasers.lasers  # a laser Group
+        self.ship_lasers = game.ship_lasers.lasers  # a laser Group
         self.alien_lasers = game.alien_lasers
         self.screen = game.screen
         self.settings = game.settings
-        self.sound = game.sound
         self.ship = game.ship
         self.create_fleet()
+
+    def get_number_aliens_x(self, alien_width):
+        available_space_x = self.settings.screen_width - 6 * alien_width
+        number_aliens_x = int(available_space_x / (1.2 * alien_width))
+        return number_aliens_x
 
     def reset(self):
         self.aliens.empty()
         self.create_fleet()
+        self.aliens_lasers.reset()
 
     def create_alien(self, alien_number, row_number):
         if row_number > 5:
             raise ValueError("row number must be less than 6")
-        type = (row_number // 2) % 3
+        type = row_number // 2
         alien = Alien(game=self.game, type=type)
         alien_width = alien.rect.width
 
-        alien.x = alien_width + 1.2 * alien_width * alien_number
+        alien.x = alien_width + 1.5 * alien_width * alien_number
         alien.rect.x = alien.x
-        alien.rect.y = 2 * alien.rect.height + 1.2 * alien.rect.height * row_number
+        alien.rect.y = alien.rect.height + 1.2 * alien.rect.height * row_number
         self.aliens.add(alien)
 
     def create_fleet(self):
-        number_aliens_x = 11
+        number_aliens_x = self.get_number_aliens_x(self.model_alien.rect.width)
         number_rows = 5
         for row_number in range(number_rows):
             for alien_number in range(number_aliens_x):
@@ -137,8 +141,16 @@ class Aliens:
             alien.rect.y += self.settings.fleet_drop_speed
         self.settings.fleet_direction *= -1
 
+    # alien_lasers hitting the ship Or
+    # alien_lasers hitting a barrier or
+    # alien_lasers hitting a ship_lasers
+
+    # ship_lasers hitting an alien or
+    # ship_lasers hitting a barrier or
+    # ship_lasers hitting an aliens_lasers
+
     def check_collisions(self):
-        collisions = pg.sprite.groupcollide(self.aliens, self.lasers, False, True)
+        collisions = pg.sprite.groupcollide(self.aliens, self.ship_lasers, False, True)
         if collisions:
             for alien in collisions:
                 alien.hit()
@@ -153,6 +165,7 @@ class Aliens:
             if alien.dead:  # set True once the explosion animation has completed
                 alien.remove()
             alien.update()
+        self.alien_lasers.update()
 
     def draw(self):
         for alien in self.aliens.sprites():

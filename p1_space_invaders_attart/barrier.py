@@ -16,6 +16,9 @@ class Barriers:
             Barrier(game=self.game, rect=pg.Rect(x * 2 * width + 1.5 * width, top, width, height)) for x in range(4)
         ]
 
+    def hit(self):
+        pass
+
     def reset(self):
         self.create_barriers()
 
@@ -33,6 +36,12 @@ class Barrier(Sprite):
         self.screen = game.screen
         self.rect = rect
 
+        # self.settings = game.settings
+        # self.image = pg.image.load('images/alien0.bmp')
+        # self.rect = self.image.get_rect()
+        # self.rect.y = self.rect.height
+        # self.x = float(self.rect.x)
+
     def hit(self):
         pass
 
@@ -41,4 +50,4 @@ class Barrier(Sprite):
 
     def draw(self):
         pg.draw.rect(self.screen, Barrier.color, self.rect, 0, 15)
-        pg.draw.circle(self.screen, self.settings.bg_color, (self.rect.centerx, self.rect.bottom), self.rect.width / 4)
+        pg.draw.circle(self.screen, self.settings.bg_color, (self.rect.centerx, self.rect.bottom), self.rect.width / 6)
