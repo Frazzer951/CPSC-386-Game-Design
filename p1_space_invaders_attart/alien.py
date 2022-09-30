@@ -11,9 +11,9 @@ class Alien(Sprite):
     # alien_images3 = [pg.image.load(f"images/alien3_{n}.png") for n in range(2)]
 
     alien_timers = {
-        0: Timer(image_list=alien_images0),
-        1: Timer(image_list=alien_images1),
-        2: Timer(image_list=alien_images2),
+        0: Timer(image_list=alien_images0, delay=200),
+        1: Timer(image_list=alien_images1, delay=200),
+        2: Timer(image_list=alien_images2, delay=200),
         # 3: Timer(image_list=alien_images3),
     }
 
