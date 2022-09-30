@@ -9,11 +9,11 @@ class Barriers:
         self.create_barriers()
 
     def create_barriers(self):
-        width = self.settings.screen_width / 10
-        height = 2.0 * width / 4.0
+        rect = Barrier.barriers[0].get_rect()
+        width = rect.width
+        height = rect.height
         top = self.settings.screen_height - 2.1 * height
-        rects = [pg.Rect(x * 2 * width + 1.5 * width, top, width, height) for x in range(4)]  # SP w  3w  5w  7w  SP
-        self.barriers = [Barrier(game=self.game, rect=rects[i]) for i in range(4)]
+        self.barriers = [Barrier(game=self.game, x=i * 1.5 * width + width, y=top) for i in range(5)]
 
     def hit(self):
         pass
@@ -29,24 +29,30 @@ class Barriers:
 class Barrier(Sprite):
     color = 255, 0, 0
 
-    def __init__(self, game, rect):
+    barriers = [pg.image.load(f"images/barrier_{n}.png") for n in range(6)]
+
+    def __init__(self, game, x, y):
         super().__init__()
         self.settings = game.settings
         self.screen = game.screen
-        self.rect = rect
-
-        # self.settings = game.settings
-        # self.image = pg.image.load('images/alien0.bmp')
-        # self.rect = self.image.get_rect()
-        # self.rect.y = self.rect.height
-        # self.x = float(self.rect.x)
+        self.damage = 0
+        self.image = Barrier.barriers[0]
+        self.rect = self.image.get_rect()
+        self.rect.left = x
+        self.rect.top = y
 
     def hit(self):
-        pass
+        self.damage += 1
+        if self.damage >= 6:
+            self.kill()
+        self.image = Barrier.barriers[self.damage]
 
     def update(self):
         self.draw()
 
     def draw(self):
-        pg.draw.rect(self.screen, Barrier.color, self.rect, 0, 20)
-        pg.draw.circle(self.screen, self.settings.bg_color, (self.rect.centerx, self.rect.bottom), self.rect.width / 6)
+        # rect = self.image.get_rect()
+        # rect.left, rect.top = self.rect.left, self.rect.top
+        self.screen.blit(self.image, self.rect)
+        # pg.draw.rect(self.screen, Barrier.color, self.rect, 0, 20)
+        # pg.draw.circle(self.screen, self.settings.bg_color, (self.rect.centerx, self.rect.bottom), self.rect.width / 6)
