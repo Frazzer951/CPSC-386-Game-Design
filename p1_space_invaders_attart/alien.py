@@ -74,9 +74,6 @@ class Aliens:
         self.sb = game.scoreboard
         self.aliens = Group()
 
-        # self.ship_lasers = game.ship.lasers.lasers    # a laser Group
-        # self.aliens_lasers = Lasers(settings=game.settings)
-
         self.ship_lasers = game.ship_lasers.lasers  # a laser Group
         self.alien_lasers = game.alien_lasers
 
@@ -148,20 +145,36 @@ class Aliens:
                 self.alien_lasers.shoot(game=self.game, x=alien.rect.centerx, y=alien.rect.bottom)
             i += 1
 
-    # alien_lasers hitting the ship Or
-    # alien_lasers hitting a barrier or
-    # alien_lasers hitting a ship_lasers
-
-    # ship_lasers hitting an alien or
-    # ship_lasers hitting a barrier or
-    # ship_lasers hitting an aliens_lasers
-
     def check_collisions(self):
+        # ship_lasers hitting an alien
         collisions = pg.sprite.groupcollide(self.aliens, self.ship_lasers, False, True)
         if collisions:
             for alien in collisions:
                 alien.hit()
             self.sb.increment_score()
+
+        # ship_lasers hitting a barrier
+        collisions = pg.sprite.groupcollide(self.game.barriers.barriers, self.ship_lasers, False, True)
+        if collisions:
+            for barrier in collisions:
+                barrier.hit()
+
+        # alien_lasers hitting a barrier
+        collisions = pg.sprite.groupcollide(self.game.barriers.barriers, self.alien_lasers.lasers, False, True)
+        if collisions:
+            for barrier in collisions:
+                barrier.hit()
+
+        # alien_lasers hitting the ship
+        for laser in self.alien_lasers.lasers:
+            if laser.rect.colliderect(self.ship.rect):
+                self.ship.die()
+
+        # alien_lasers hitting a ship_lasers
+        collisions = pg.sprite.groupcollide(self.alien_lasers.lasers, self.ship_lasers, False, True)
+        if collisions:
+            for laser in collisions:
+                laser.hit()
 
     def update(self):
         self.check_fleet_edges()

@@ -54,6 +54,9 @@ class Laser(Sprite):
         self.timer = Timer(image_list=imagelist, delay=200)
         sound.shoot_laser()
 
+    def hit(self):
+        self.kill()
+
     def update(self):
         self.y += self.speed_factor if self.type == LaserType.ALIEN else -self.speed_factor
         self.rect.y = self.y
@@ -64,4 +67,3 @@ class Laser(Sprite):
         rect = image.get_rect()
         rect.left, rect.top = self.rect.left, self.rect.top
         self.screen.blit(image, rect)
-        # pg.draw.rect(self.screen, self.color, self.rect)

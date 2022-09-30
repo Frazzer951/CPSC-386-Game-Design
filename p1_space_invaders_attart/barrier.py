@@ -1,11 +1,13 @@
 import pygame as pg
-from pygame.sprite import Sprite
+from pygame.sprite import Sprite, Group
 
 
 class Barriers:
     def __init__(self, game):
         self.game = game
         self.settings = game.settings
+        self.barriers = Group()
+
         self.create_barriers()
 
     def create_barriers(self):
@@ -13,12 +15,12 @@ class Barriers:
         width = rect.width
         height = rect.height
         top = self.settings.screen_height - 2.1 * height
-        self.barriers = [Barrier(game=self.game, x=i * 1.5 * width + width, y=top) for i in range(5)]
-
-    def hit(self):
-        pass
+        for i in range(5):
+            barrier = Barrier(game=self.game, x=i * 1.5 * width + width, y=top)
+            self.barriers.add(barrier)
 
     def reset(self):
+        self.barriers.empty()
         self.create_barriers()
 
     def update(self):
@@ -45,7 +47,8 @@ class Barrier(Sprite):
         self.damage += 1
         if self.damage >= 6:
             self.kill()
-        self.image = Barrier.barriers[self.damage]
+        else:
+            self.image = Barrier.barriers[self.damage]
 
     def update(self):
         self.draw()
