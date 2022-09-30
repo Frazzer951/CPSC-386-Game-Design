@@ -8,7 +8,6 @@ class Settings:
         self.screen_height = 800
         self.bg_color = (150, 150, 150)
 
-        # # TODO: test laser with a really wide laser
         self.laser_width = 5
         self.laser_height = 30
         self.laser_color = 255, 0, 0
@@ -17,7 +16,6 @@ class Settings:
         self.aliens_shoot_every = 120  # about every 2 seconds at 60 fps
         self.alien_points = 50
 
-        # # TODO: set a ship_limit of 3
         self.ship_limit = 3  # total ships allowed in game before game over
 
         self.fleet_drop_speed = 5
