@@ -55,6 +55,7 @@ class Ship(Sprite):
     def update(self):
         if self.timer == self.timer_explosion and self.timer.is_expired():
             self.game.reset() if self.ships_left > 0 else self.game.game_over()
+            return
 
         self.posn += self.vel
         self.posn, self.rect = clamp(self.posn, self.rect, self.settings)
