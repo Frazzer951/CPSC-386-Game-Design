@@ -8,16 +8,16 @@ class Alien(Sprite):
     alien_images0 = [pg.image.load(f"images/alien0_{n}.png") for n in range(2)]
     alien_images1 = [pg.image.load(f"images/alien1_{n}.png") for n in range(2)]
     alien_images2 = [pg.image.load(f"images/alien2_{n}.png") for n in range(2)]
-    # alien_images3 = [pg.image.load(f"images/alien3_{n}.png") for n in range(2)]
+    alien_images3 = [pg.image.load(f"images/alien3_{n}.png") for n in range(2)]
 
     alien_timers = {
         0: Timer(image_list=alien_images0, delay=200),
         1: Timer(image_list=alien_images1, delay=200),
         2: Timer(image_list=alien_images2, delay=200),
-        # 3: Timer(image_list=alien_images3),
+        3: Timer(image_list=alien_images3),
     }
 
-    alien_explosion_images = [pg.image.load(f"images/explode{n}.png") for n in range(7)]
+    alien_explosion_images = [pg.image.load(f"images/explosion_{n}.png") for n in range(7)]
 
     def __init__(self, game, type):
         super().__init__()

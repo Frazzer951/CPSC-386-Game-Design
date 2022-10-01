@@ -1,12 +1,13 @@
-import pygame as pg
-from pygame.sprite import Sprite
-from laser import Lasers
 from game_functions import clamp
+from pygame.sprite import Sprite
+from timer import Timer
 from vector import Vector
-from sys import exit
+import pygame as pg
 
 
 class Ship(Sprite):
+    ship_images = [pg.image.load(f"images/ship_{n}.png") for n in range(2)]
+
     def __init__(self, game):
         super().__init__()
         self.game = game
@@ -22,10 +23,11 @@ class Ship(Sprite):
         self.lasers = game.ship_lasers
         self.shooting = False
         self.lasers_attempted = 0
+        self.timer = Timer(image_list=Ship.ship_images, delay=200)
 
     def center_ship(self):
         self.rect.centerx = self.screen_rect.centerx
-        self.rect.bottom = self.screen_rect.bottom
+        self.rect.bottom = self.screen_rect.bottom - 10
         return Vector(self.rect.left, self.rect.top)
 
     def reset(self):
@@ -50,4 +52,5 @@ class Ship(Sprite):
         self.draw()
 
     def draw(self):
-        self.screen.blit(self.image, self.rect)
+        image = self.timer.image()
+        self.screen.blit(image, self.rect)
