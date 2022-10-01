@@ -14,10 +14,20 @@ class Alien(Sprite):
         0: Timer(image_list=alien_images0, delay=200),
         1: Timer(image_list=alien_images1, delay=200),
         2: Timer(image_list=alien_images2, delay=200),
-        3: Timer(image_list=alien_images3),
+        3: Timer(image_list=alien_images3, delay=200),
     }
 
-    alien_explosion_images = [pg.image.load(f"images/explosion_{n}.png") for n in range(7)]
+    alien_explosions0 = [pg.image.load(f"images/explosion_10_{n}.png") for n in range(7)]
+    alien_explosions1 = [pg.image.load(f"images/explosion_20_{n}.png") for n in range(7)]
+    alien_explosions2 = [pg.image.load(f"images/explosion_40_{n}.png") for n in range(7)]
+    alien_explosions3 = [pg.image.load(f"images/explosion_{n}.png") for n in range(7)]
+
+    alien_explosions = {
+        0: alien_explosions0,
+        1: alien_explosions1,
+        2: alien_explosions2,
+        3: alien_explosions3,
+    }
 
     def __init__(self, game, type):
         super().__init__()
@@ -35,7 +45,7 @@ class Alien(Sprite):
         # self.timer_normal = Timer(image_list=self.alien_types[type])
 
         self.timer_normal = Alien.alien_timers[type]
-        self.timer_explosion = Timer(image_list=Alien.alien_explosion_images, is_loop=False)
+        self.timer_explosion = Timer(image_list=Alien.alien_explosions[type], delay=200, is_loop=False)
         self.timer = self.timer_normal
 
     def check_edges(self):

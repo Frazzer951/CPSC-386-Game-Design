@@ -40,7 +40,7 @@ class Laser(Sprite):
     ship_laser_images = [pg.transform.rotozoom(pg.image.load(f"images/laser_{n}.png"), 0, 1) for n in range(2)]
     laser_images = {LaserType.ALIEN: alien_laser_images, LaserType.SHIP: ship_laser_images}
 
-    laser_explosion_images = [pg.image.load(f"images/explode{n}.png") for n in range(7)]
+    laser_explosion_images = [pg.image.load(f"images/explosion_{n}.png") for n in range(7)]
 
     def __init__(self, settings, screen, x, y, sound, type):
         super().__init__()
