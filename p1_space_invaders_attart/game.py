@@ -2,7 +2,6 @@ from alien import Aliens
 from barrier import Barriers
 from button import Button
 from laser import Lasers, LaserType
-from pathlib import Path
 from scoreboard import Scoreboard
 from settings import Settings
 from ship import Ship
@@ -46,20 +45,11 @@ class Game:
         self.gameover = True
         self.sound.stop_bg()
 
-        file = Path("highscores.dat")
-        file.touch(exist_ok=True)  # create the file if it doesn't exist
-        scores = []
-        with open("highscores.dat", "r") as file:
-            file_content = file.read()
-            scores = [] if len(file_content) == 0 else file_content.split(",")
-            scores = [int(score) for score in scores]
-            scores.append(self.scoreboard.score)
-            scores.sort(reverse=True)
-            scores = scores[:10]
-
-        with open("highscores.dat", "w") as file:
-            scores = str(scores).strip("[]")
-            file.write(scores)
+        scores = gf.read_high_scores()
+        scores.append(self.scoreboard.score)
+        scores.sort(reverse=True)
+        scores = scores[:10]
+        gf.write_high_scores(scores)
 
     def play(self):
         self.sound.play_bg()
