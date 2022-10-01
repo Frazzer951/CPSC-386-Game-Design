@@ -36,8 +36,8 @@ class Lasers:
 class Laser(Sprite):
     """A class to manage lasers fired from the ship"""
 
-    alien_laser_images = [pg.transform.rotozoom(pg.image.load(f"images/alienlaser_{n}.png"), 0, 1) for n in range(2)]
-    ship_laser_images = [pg.transform.rotozoom(pg.image.load(f"images/laser_{n}.png"), 0, 1) for n in range(2)]
+    alien_laser_images = [pg.image.load(f"images/laser_alien_{n}.png") for n in range(3)]
+    ship_laser_images = [pg.image.load(f"images/laser_ship_{n}.png") for n in range(6)]
     laser_images = {LaserType.ALIEN: alien_laser_images, LaserType.SHIP: ship_laser_images}
 
     laser_explosion_images = [pg.image.load(f"images/explosion_{n}.png") for n in range(7)]
@@ -53,7 +53,7 @@ class Laser(Sprite):
         self.color = (randint(0, 200), randint(0, 200), randint(0, 200))
         self.speed_factor = settings.laser_speed_factor
         imagelist = Laser.laser_images[type]
-        self.timer = Timer(image_list=imagelist, delay=200)
+        self.timer = Timer(image_list=imagelist)
         self.timer_explosion = Timer(image_list=Laser.laser_explosion_images, is_loop=False)
         self.dying = False
         sound.shoot_laser()
