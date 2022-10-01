@@ -16,6 +16,8 @@ class Settings:
         self.aliens_shoot_every = 120  # about every 2 seconds at 60 fps
         self.alien_points = 50
 
+        self.ufo_spawn_rate = 600
+
         self.ship_limit = 3  # total ships allowed in game before game over
 
         self.fleet_drop_speed = 5
