@@ -87,6 +87,7 @@ class Menu:
         self.high_scores_button = Button(
             (self.screen.get_rect().centerx, 650), "HIGH SCORES", Menu.get_font(45), "#DDDDDD", "#00FF00"
         )
+        self.return_button = Button((self.screen.get_rect().centerx, 750), "BACK", Menu.get_font(45), "#DDDDDD", "#00FF00")
 
     def get_font(size):
         return pg.font.SysFont(None, size)
@@ -146,7 +147,38 @@ class Menu:
             pg.display.flip()
 
     def highscores(self):
-        pass
+        while True:
+            self.screen.fill((0, 0, 0))
+
+            mouse_pos = pg.mouse.get_pos()
+
+            highscore_text = Menu.get_font(130).render("HIGHSCORES", True, "#FFFFFF")
+            highscore_rect = highscore_text.get_rect()
+            highscore_rect.left = self.screen.get_rect().centerx - highscore_rect.width / 2
+            highscore_rect.top = 20
+            self.screen.blit(highscore_text, highscore_rect)
+
+            self.return_button.setHover(mouse_pos)
+            self.return_button.draw(self.screen)
+
+            scores = gf.read_high_scores()
+            score_left = 500
+            for i, score in enumerate(scores):
+                score_text = Menu.get_font(64).render(f"{i+1}: {score}", True, "#DDDDDD")
+                score_rect = score_text.get_rect()
+                score_rect.left = score_left
+                score_rect.top = 120 + i * 1.2 * score_rect.height
+                self.screen.blit(score_text, score_rect)
+
+            for event in pg.event.get():
+                if event.type == pg.QUIT:
+                    pg.quit()
+                    sys.exit()
+                if event.type == pg.MOUSEBUTTONDOWN:
+                    if self.return_button.onButton(mouse_pos):
+                        return
+
+            pg.display.flip()
 
     def play(self):
         g = Game()
