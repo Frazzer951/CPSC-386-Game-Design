@@ -1,7 +1,8 @@
-from pathlib import Path
-from vector import Vector
-import pygame as pg
 import sys
+from pathlib import Path
+
+import pygame as pg
+from vector import Vector
 
 movement = {
     pg.K_LEFT: Vector(-1, 0),  # dictionary to map keys to Vector velocities

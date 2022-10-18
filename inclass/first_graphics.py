@@ -1,5 +1,6 @@
-import pygame
 import sys
+
+import pygame
 
 # Set up the colors.
 BLACK = (0, 0, 0)

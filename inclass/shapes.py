@@ -1,5 +1,5 @@
-from cmath import sqrt
 import math
+from cmath import sqrt
 
 
 def print_message(msg, end=False):

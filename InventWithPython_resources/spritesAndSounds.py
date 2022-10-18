@@ -1,7 +1,8 @@
-import pygame
+import random
 import sys
 import time
-import random
+
+import pygame
 from pygame.locals import *
 
 # Set up pygame.

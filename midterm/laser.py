@@ -1,8 +1,9 @@
-import pygame as pg
-from pygame.sprite import Sprite, Group
-from timer import Timer
-from random import randint
 from enum import Enum
+from random import randint
+
+import pygame as pg
+from pygame.sprite import Group, Sprite
+from timer import Timer
 
 
 class LaserType(Enum):

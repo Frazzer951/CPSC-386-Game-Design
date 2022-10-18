@@ -1,6 +1,7 @@
+import time
+
 import pygame as pg
 from laser import LaserType
-import time
 
 
 class Sound:

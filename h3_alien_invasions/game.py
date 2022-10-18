@@ -1,10 +1,10 @@
 from time import sleep
-import pygame as pg
-from settings import Settings
-import game_functions as gf
 
+import game_functions as gf
+import pygame as pg
 from alien import Aliens
 from laser import Lasers
+from settings import Settings
 from ship import Ship
 from sound import Sound
 

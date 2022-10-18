@@ -1,7 +1,8 @@
-from pygame.sprite import Sprite, Group
 from random import randint
-from timer import Timer
+
 import pygame as pg
+from pygame.sprite import Group, Sprite
+from timer import Timer
 
 
 class Alien(Sprite):

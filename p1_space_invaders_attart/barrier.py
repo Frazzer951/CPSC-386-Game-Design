@@ -1,5 +1,5 @@
 import pygame as pg
-from pygame.sprite import Sprite, Group
+from pygame.sprite import Group, Sprite
 
 
 class Barriers:

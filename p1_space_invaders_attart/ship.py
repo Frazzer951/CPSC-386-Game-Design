@@ -1,8 +1,8 @@
+import pygame as pg
 from game_functions import clamp
 from pygame.sprite import Sprite
 from timer import Timer
 from vector import Vector
-import pygame as pg
 
 
 class Ship(Sprite):

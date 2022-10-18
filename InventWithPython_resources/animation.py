@@ -1,6 +1,7 @@
-import pygame
 import sys
 import time
+
+import pygame
 from pygame.locals import *
 
 # Set up pygame.

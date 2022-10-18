@@ -1,8 +1,9 @@
-import pygame as pg
-from pygame.sprite import Sprite
-from game_functions import clamp
-from vector import Vector
 from sys import exit
+
+import pygame as pg
+from game_functions import clamp
+from pygame.sprite import Sprite
+from vector import Vector
 
 
 class Ship(Sprite):

@@ -1,6 +1,6 @@
 import pygame as pg
-from pygame.sprite import Sprite, Group
 from laser import Lasers
+from pygame.sprite import Group, Sprite
 
 
 class Aliens:

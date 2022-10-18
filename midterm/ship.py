@@ -1,10 +1,11 @@
-import pygame as pg
-from pygame.sprite import Sprite
-from laser import Lasers
-from game_functions import clamp
-from vector import Vector
 from sys import exit
+
+import pygame as pg
+from game_functions import clamp
+from laser import Lasers
+from pygame.sprite import Sprite
 from timer import Timer
+from vector import Vector
 
 
 class Ship(Sprite):

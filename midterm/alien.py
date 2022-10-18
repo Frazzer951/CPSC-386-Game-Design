@@ -1,9 +1,10 @@
 from ast import Or
 from email.headerregistry import HeaderRegistry
 from random import randint
+
 import pygame as pg
-from pygame.sprite import Sprite, Group
 from laser import Lasers
+from pygame.sprite import Group, Sprite
 from timer import Timer
 
 

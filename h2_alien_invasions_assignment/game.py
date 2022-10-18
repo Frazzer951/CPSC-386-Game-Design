@@ -1,9 +1,8 @@
-import pygame as pg
-from settings import Settings
 import game_functions as gf
-from pygame.sprite import Group
-
+import pygame as pg
 from laser import Lasers
+from pygame.sprite import Group
+from settings import Settings
 from ship import Ship
 from sound import Sound
 

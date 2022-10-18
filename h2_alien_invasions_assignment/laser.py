@@ -1,6 +1,7 @@
+from random import randint
+
 import pygame as pg
 from pygame.sprite import Sprite
-from random import randint
 
 
 class Lasers:

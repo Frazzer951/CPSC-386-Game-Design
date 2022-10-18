@@ -1,3 +1,8 @@
+import sys
+from time import time
+
+import game_functions as gf
+import pygame as pg
 from alien import Aliens
 from barrier import Barriers
 from button import Button
@@ -6,10 +11,6 @@ from scoreboard import Scoreboard
 from settings import Settings
 from ship import Ship
 from sound import Sound
-from time import time
-import game_functions as gf
-import pygame as pg
-import sys
 
 
 class Game:

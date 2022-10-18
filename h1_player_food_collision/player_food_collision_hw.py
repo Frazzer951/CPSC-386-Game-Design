@@ -13,12 +13,12 @@
 
 # # ONLY CHANGE THE PARTS OF THE BOX CLASS MARKED TODO:
 
-import pygame as pg
 import sys
 import time
-from vector import Vector
 from random import randint
 
+import pygame as pg
+from vector import Vector
 
 MOVESPEED = 4
 WHITE = (255, 255, 255)

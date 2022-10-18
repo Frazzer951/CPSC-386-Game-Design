@@ -1,8 +1,8 @@
 # Sonar Treasure Hunt
 
+import math
 import random
 import sys
-import math
 
 
 def getNewBoard():

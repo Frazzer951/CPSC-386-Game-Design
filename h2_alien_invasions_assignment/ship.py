@@ -1,6 +1,6 @@
 import pygame
-from pygame.sprite import Sprite
 from game_functions import clamp
+from pygame.sprite import Sprite
 from vector import Vector
 
 

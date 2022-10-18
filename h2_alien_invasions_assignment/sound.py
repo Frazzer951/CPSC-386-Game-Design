@@ -1,5 +1,6 @@
-import pygame as pg
 from time import time
+
+import pygame as pg
 
 
 class Sound:
